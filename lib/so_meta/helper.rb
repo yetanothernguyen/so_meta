@@ -2,7 +2,8 @@ module SoMeta
   module Helper
     def so_meta(name)
       interpolation_data = instance_variable_get("@so_meta_#{name}_interpolation") || {}
-      t("so_meta.#{controller_name}.#{action_name}.#{name}", interpolation_data.merge(default: t("so_meta.defaults.#{name}")))
+      key = params[:id] ? "#{controller_name}.#{action_name}.#{params[:id]}.#{name}" : "#{controller_name}.#{action_name}.#{name}"
+      t("so_meta.#{key}", interpolation_data.merge(default: t("so_meta.defaults.#{name}")))
     end
 
     def so_meta_interpolation(name, hash)
